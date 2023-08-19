@@ -17,7 +17,7 @@ class Employee
     // Get All employees from the database
     public function getAllEmployees()
     {
-        $query = "SELECT id, name,email, age, designation, created_at FROM" . $this->db_table . "";
+        $query = "SELECT id, name, email, age, designation, created_at FROM " . $this->db_table . ";";
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt;

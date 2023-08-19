@@ -20,3 +20,25 @@ $employees = $employee->getAllEmployees();
 $employeesCount = $employees->rowCount();
 
 echo json_encode($employeesCount);
+if ($employeesCount > 0) {
+    $employeeArr = array();
+    $employeeArr['body'] = array();
+    $employeeArr['employeesCount'] = $employeesCount;
+
+    while ($row = $employees->fetch(PDO::FETCH_ASSOC)) {
+        extract($row);
+        $e = array(
+            "id" => $id,
+            "name" => $name,
+            "email" => $email,
+            "age" => $age,
+            "designation" => $designation,
+            "created_at" => $created_at
+        );
+        array_push($employeeArr['body'], $e);
+    }
+    echo json_encode($employeeArr);
+} else {
+    http_response_code(404);
+    echo json_encode(array("message" => "No record found"));
+}
