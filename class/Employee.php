@@ -25,13 +25,7 @@ class Employee
     // Create employee in the database
     public function createEmployee()
     {
-        $query = "INSERT INTO" . $this->db_table . "
-        SET 
-        name = :name,
-        email = :email,
-        age = :age,
-        designation = :designation,
-        created_at = :created_at";
+        $query = "INSERT INTO " . $this->db_table . " SET name = :name, email = :email, age = :age, designation = :designation, created_at = :created_at";
         $stmt = $this->conn->prepare($query);
 
         // Sinitizing the data before inserting to the bd       $this->name = htmlspecialchars(strip_tags($this->name));
@@ -55,8 +49,7 @@ class Employee
     // Get single row from database
     public function getSingleEmployee()
     {
-        $query = "SELECT id,name,email,age,designation,created_at FROM " . $this->db_table . "
-         WHERE id=? LIMIT 0.1";
+        $query = "SELECT id, name, email, age, designation, created_at FROM " . $this->db_table . " WHERE id=? LIMIT 1;";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(1, $this->id);
         $stmt->execute();
